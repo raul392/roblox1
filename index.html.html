@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox 2010 - Clone</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #d90d0d;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      color: white;
+      position: relative;
+    }
+    header img.logo {
+      height: 60px;
+      margin-right: 40px;
+    }
+    nav {
+      margin-left: 30px;
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 70px;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    nav a:hover { text-decoration: underline; }
+    #user-area {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #user-area img.avatar {
+      width: 40px;
+      height: 40px;
+      border: 2px solid white;
+      border-radius: 4px;
+    }
+    #user-area span {
+      font-weight: bold;
+      color: white;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      background: white;
+    }
+    aside {
+      width: 200px;
+      background-color: #e8e8e8;
+      border-right: 1px solid #ccc;
+      padding-top: 20px;
+    }
+    aside ul { list-style: none; }
+    aside ul li {
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #333;
+      user-select: none;
+    }
+    aside ul li:hover {
+      background-color: #d90d0d;
+      color: white;
+    }
+    aside ul li.configuracoes { display: none; }
+    #content {
+      flex: 1;
+      padding: 20px;
+    }
+    #login-screen {
+      width: 400px;
+      margin: 100px auto;
+      background: white;
+      border: 2px solid #d90d0d;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #login-screen h2 {
+      margin-bottom: 20px;
+      color: #d90d0d;
+    }
+    #login-screen input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #login-screen button {
+      margin-top: 20px;
+      background-color: #d90d0d;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    #catalogo img {
+      display: block;
+      margin: 20px auto;
+      width: 200px;
+      border: 5px solid #d90d0d;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #d90d0d;
+    }
+    #mapas div {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+      gap: 20px;
+    }
+    #mapas a img {
+      width: 100%;
+      height: 150px;
+      border: 3px solid #d90d0d;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="robloxlogo.png" alt="Roblox Logo" class="logo">
+    <nav>
+      <a id="nav-catalogo">Catálogo</a>
+      <a id="nav-eventos">Eventos</a>
+      <a id="nav-grupos">Grupos</a>
+      <a id="nav-mapas">Mapas</a>
+      <a id="nav-configuracoes" style="display:none;">Configurações</a>
+    </nav>
+    <div id="user-area" style="display:none;">
+      <span id="username-display"></span>
+      <img src="noob.png" alt="Avatar Noob" class="avatar">
+    </div>
+  </header>
+  <main>
+    <aside>
+      <ul>
+        <li id="menu-catalogo">Catálogo</li>
+        <li id="menu-eventos">Eventos</li>
+        <li id="menu-grupos">Grupos</li>
+        <li id="menu-mapas">Mapas</li>
+        <li id="menu-configuracoes" class="configuracoes">Configurações</li>
+      </ul>
+    </aside>
+    <section id="content">
+      <div id="login-screen">
+        <h2>Entrar no Roblox</h2>
+        <input type="text" id="username" placeholder="Digite seu nome de usuário">
+        <button onclick="doLogin()">Entrar</button>
+      </div>
+      <div id="catalogo" class="tab-content">
+        <h2>Catálogo</h2>
+        <img src="noob.png" alt="Personagem Noob">
+      </div>
+      <div id="eventos" class="tab-content">
+        <h2>Eventos</h2>
+        <p>Nenhum evento disponível.</p>
+      </div>
+      <div id="grupos" class="tab-content">
+        <h2>Grupos</h2>
+        <p>Nenhum grupo por enquanto.</p>
+      </div>
+      <div id="mapas" class="tab-content">
+        <h2>Mapas Clássicos do Roblox</h2>
+        <div>
+          <a href="https://www.roblox.com/pt/games/126884695634066/Grow-a-Garden" target="_blank"><img src="map1.png" alt="Grow a Garden"></a>
+          <a href="https://www.roblox.com/pt/games/2753915549/Blox-Fruits" target="_blank"><img src="map2.png" alt="Blox Fruits"></a>
+          <a href="https://www.roblox.com/pt/games/47324/Sword-Fights-on-the-Heights-IV" target="_blank"><img src="map3.png" alt="Sword Fights"></a>
+          <a href="https://www.roblox.com/pt/games/893973440/Flee-the-Facility" target="_blank"><img src="map4.png" alt="Flee the Facility"></a>
+        </div>
+      </div>
+      <div id="configuracoes" class="tab-content">
+        <h2>Configurações</h2>
+        <label for="novo-nome">Novo nome de usuário:</label>
+        <input type="text" id="novo-nome" placeholder="Digite novo nome" />
+        <button onclick="mudarNome()">Mudar Nome</button>
+        <br><br>
+        <button onclick="fazerLogout()">Sair</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    const tabs = ['catalogo', 'eventos', 'grupos', 'mapas', 'configuracoes'];
+    const showTab = (id) => {
+      document.querySelectorAll('.tab-content').forEach(div => div.classList.remove('active'));
+      if (id) document.getElementById(id).classList.add('active');
+    };tabs.forEach(tab => {
+  const menu = document.getElementById('menu-' + tab);
+  const nav = document.getElementById('nav-' + tab);
+  if (menu) menu.addEventListener('click', () => showTab(tab));
+  if (nav) nav.addEventListener('click', () => showTab(tab));
+});
+
+function doLogin() {
+  const name = document.getElementById('username').value.trim();
+  if (!name) return alert('Digite um nome!');
+  document.getElementById('username-display').textContent = name;
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('user-area').style.display = 'flex';
+  document.querySelector('aside').style.display = 'block';
+  document.getElementById('nav-configuracoes').style.display = 'inline';
+  document.getElementById('menu-configuracoes').style.display = 'block';
+  showTab('mapas');
+}
+
+function mudarNome() {
+  const novoNome = document.getElementById('novo-nome').value.trim();
+  if (!novoNome) return alert('Digite um novo nome!');
+  document.getElementById('username-display').textContent = novoNome;
+  alert('Nome atualizado para ' + novoNome);
+}
+
+function fazerLogout() {
+  location.reload();
+}
+
+window.onload = () => {
+  document.querySelector('aside').style.display = 'none';
+  showTab('');
+};
+
+  </script>
+</body>
+</html>
